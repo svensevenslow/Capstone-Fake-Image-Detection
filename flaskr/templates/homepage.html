@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+      <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+  </head>
+  <body>
+    <form action= "www.google.com">
+    <input type ="file" id="file"accept="image/*">
+    <label for ="file">
+      <i class="material-icons">
+          add_photo_alternate
+      </i> &nbsp;
+      Choose a Photo
+    </label>
+      <input type="submit" id ="submit" Value="Submit">
+      </form>
+  </body>
+</html>
