@@ -7,20 +7,48 @@
       <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
   </head>
   <body>
-
-    <form id = "myForm" name = "myForm" action = "http://localhost:5000/analysis/metadata" method = "POST" 
+<div class="d-flex flex-column" style="height: 100vh">
+<div class="d-flex p-3 bg-secondary text-white justify-content-center">
+  <div class="p-2 bg-info"><h1>Fake Image Detection</h1></div>
+</div>
+<div class="d-flex flex-row align-self-stretch flex-grow-1"style="max-width:100vw">
+<div class="card  flex-grow-1 text-white bg-dark m-2">
+      <div class="card-body">
+        <h5 class="card-title">Upload Image</h5>
+       <form id = "myForm" name = "myForm" action = "http://localhost:5000/analysis/metadata" method = "POST" 
          enctype = "multipart/form-data" >
-    <input type ="file" id="image_file" accept="image/*">
-    <label for ="image_file">
-      <i class="material-icons">
-          add_photo_alternate
-      </i> &nbsp;
-      Choose a Photo
-    </label>
-     <input type="submit" id ="submit" Value="Submit">
+    <input type ="file" name="image_file" accept="image/*" onChange="loadFile(event)">
+     <button type="submit" class="btn btn-primary m-2">Submit</button>
      </form>
+      </div>
+<img id="output" class="card-img-top" alt="...">
+</div>
+<div class="card  text-white bg-dark m-2">
+      <div class="card-body">
+        <h5 class="card-title">Meta Data Analysis</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+<div class="card  text-white bg-dark m-2">
+      <div class="card-body">
+        <h5 class="card-title">Model Prediction</h5>
+	<button type="button" class="btn btn-primary">Get Result</button>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+</div>
+
+</div>
   </body>
 
 </html>
