@@ -7,8 +7,10 @@ bp = Blueprint('meta', __name__, url_prefix='/analysis')
 
 @bp.route('/metadata', methods=['POST'])
 def metadata_analysis():
-    if 'image' not in request.files:
+    if 'image_file' not in request.files:
         return make_response({"message": "Image not sent"}, 500)
+    file = request.files['image_file']
+    file.save("uploads/tmp.jpg")
     '''
     file = request.files['image']
     file.save("/home/kainaat/Documents/PEC/sem 8/Major", 'tmp.jpg')
