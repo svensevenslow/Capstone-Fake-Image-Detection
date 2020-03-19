@@ -3,9 +3,6 @@ body{
   padding: 0;
   margin: 0;
 }
-input[type="file"]{
-  display: none;
-}
 input[type="submit"]{
   display: none;
 }

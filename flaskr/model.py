@@ -1,4 +1,4 @@
-from flask import (Blueprint, request, make_response)
+from flask import (Blueprint, render_template, make_response)
 from keras.models import model_from_json
 from keras import backend as K
 from keras.optimizers import RMSprop
@@ -22,11 +22,9 @@ def get_model_prediction():
     image_to_predict = np.array(array(convert_to_ela_image(path, quality).resize((128, 128))).flatten() / 255)
     image_to_predict = image_to_predict.reshape(-1, 128, 128, 3)
     result = loaded_model.predict(image_to_predict)
-    #print(result.astype(np.int32))
     fake = result[0][1]*100
-    print(fake)
-    return fake
-    #return make_response({"fake":result[0][1], "real":result[0][0]},200)
+    real = result[0][0]*100
+    return render_template('homepage.html',Fake = fake)
 
 
 def convert_to_ela_image(path, quality):
