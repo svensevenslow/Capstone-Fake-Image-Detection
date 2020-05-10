@@ -1,7 +1,5 @@
 from flask import (Blueprint, render_template, make_response)
-from keras.models import model_from_json
-from keras import backend as K
-from keras.optimizers import RMSprop
+from tensorflow import keras
 import numpy as np
 from PIL import Image
 import os
@@ -13,7 +11,7 @@ bp = Blueprint('model', __name__, url_prefix='/model')
 
 @bp.route('/prediction', methods=['GET'])
 def get_model_prediction():
-    K.clear_session()
+    keras.backend.clear_session()
     loaded_model = load_model()
 
     path = "uploads/tmp.jpg"
@@ -52,8 +50,8 @@ def load_model():
     json_file = open('model/model.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
-    loaded_model = model_from_json(loaded_model_json)
+    loaded_model = keras.models.model_from_json(loaded_model_json)
     loaded_model.load_weights("model/model.h5")
-    optimizer = RMSprop(lr=0.0005, rho=0.9, epsilon=1e-08, decay=0.0)
+    optimizer = keras.optimizers.RMSprop(lr=0.0005, rho=0.9, epsilon=1e-08, decay=0.0)
     loaded_model.compile(optimizer=optimizer, loss="categorical_crossentropy", metrics=["accuracy"])
     return loaded_model

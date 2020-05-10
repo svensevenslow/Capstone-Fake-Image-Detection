@@ -1,4 +1,4 @@
-from flask import (Blueprint, request, make_response)
+from flask import (Blueprint, request, make_response, render_template, flash)
 from PIL import Image, ExifTags
 from PIL.ExifTags import TAGS
 
@@ -7,21 +7,22 @@ bp = Blueprint('meta', __name__, url_prefix='/analysis')
 
 @bp.route('/metadata', methods=['POST'])
 def metadata_analysis():
-    if 'image_file' not in request.files:
-        return make_response({"message": "Image not sent"}, 500)
+   
+    meta_analysis = 1
+    path = "uploads/tmp.jpg"
     file = request.files['image_file']
-    file.save("uploads/tmp.jpg")
-    '''
-    file = request.files['image']
-    file.save("/home/kainaat/Documents/PEC/sem 8/Major", 'tmp.jpg')
-
+    file.save(path)
     
-    img = Image.open('/home/kainaat/Documents/PEC/sem 8/Major/tmp.jpg');
+    img = Image.open(path);
 
     fakeness = 0;
     exif_data = img._getexif()
     tags = {}
     
+    if exif_data is None:
+        meta_analysis = 0
+        return render_template('homepage.html', meta_analysis=meta_analysis)
+
     for tag, value in exif_data.items():
         decoded = TAGS.get(tag, tag)
         tags[decoded] = value
@@ -32,18 +33,16 @@ def metadata_analysis():
         temp = str(tags[key])
         if "Photoshop" in temp:
             fakeness = fakeness + 5
-            tags_found = tags_found + "Photoshop"
+            tags_found = tags_found + "Photoshop\n"
         if "Gimp" in temp:
             fakeness = fakeness + 5
-            tags_found = tags_found + "Gimp"
+            tags_found = tags_found + "Gimp\n"
         if "Corel" in temp:
             fakeness = fakeness + 5
-            tags_found = tags_found + "Corel"
+            tags_found = tags_found + "Corel\n"
         if "Adobe" in temp:
             fakeness = fakeness + 3
-            tags_found = tags_found + "Adobe"
-    '''
-    response = make_response({"message": "Image Upload Successful"}, 200)
-    #response.headers['fakeness'] = fakeness
-    #response.headers['tags_found'] = tags_found
-    return response
+            tags_found = tags_found + "Adobe\n"
+    
+
+    return render_template('homepage.html', meta_fakeness=fakeness, meta_tags_found=tags_found, meta_analysis=meta_analysis)
