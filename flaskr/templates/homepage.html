@@ -34,7 +34,7 @@ var loadFile = function(event) {
       </div>
 <img id="output" class="card-img-top" alt="...">
 </div>
-<div class="card  text-white bg-dark m-2">
+<div class="card  text-white bg-dark m-2" style="width: 20rem;">
       <div class="card-body">
         <h5 class="card-title">Meta Data Analysis</h5>
 	<p class="card-text">We have used the following metric for calculating  value of Meta-Real-Fake-Value(default value 0)
@@ -52,7 +52,7 @@ var loadFile = function(event) {
 
       </div>
     </div>
-<div class="card  text-white bg-dark m-2">
+<div class="card  text-white bg-dark m-2" style="width: 20rem;">
       <div class="card-body">
         <h5 class="card-title">Model Prediction</h5>
 	{% if meta_analysis == 1 %}
@@ -62,6 +62,16 @@ var loadFile = function(event) {
         <p class="card-text">Percentage Fake Prediction: {{Fake}}</p>
       </div>
     </div>
+
+<div class="card  text-white bg-dark m-2" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title">Deep Fake Detection</h5>
+            <form id = "myForm" name = "myForm" action = "http://localhost:5000/model/deep_fake_prediction" method = "GET">
+	    <input type="submit" value="Get Result">
+	<p class="card-text">Check whether the image is a deep fake or not</p>
+      </div>
+    </div>
+
 </div>
 
 </div>

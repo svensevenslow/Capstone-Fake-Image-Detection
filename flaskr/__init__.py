@@ -2,7 +2,7 @@ import os
 
 from flask import (Flask, render_template,g)
 from flaskr import meta
-from flaskr import model
+from flaskr import model, deep_fake_model
 
 def create_app(test_config=None):
     # create and configure the app
@@ -10,6 +10,7 @@ def create_app(test_config=None):
 
     app.register_blueprint(meta.bp)
     app.register_blueprint(model.bp)
+    app.register_blueprint(deep_fake_model.bp)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
