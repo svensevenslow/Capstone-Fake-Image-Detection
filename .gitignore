@@ -1,5 +1,0 @@
-.idea/
-flaskr/__pycache__
-model/model.h5
-model/deep_fake_model.pth
-tmp.pt
